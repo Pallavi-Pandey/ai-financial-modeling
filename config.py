@@ -3,13 +3,21 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+def _get_secret(key: str) -> str:
+    """Read from st.secrets (Streamlit Cloud) then fall back to env / .env."""
+    try:
+        import streamlit as st
+        return st.secrets.get(key, os.getenv(key, ""))
+    except Exception:
+        return os.getenv(key, "")
+
 GEMINI_API_KEYS = [
-    os.getenv("GEMINI_API_KEY_1", ""),
-    os.getenv("GEMINI_API_KEY_2", ""),
+    _get_secret("GEMINI_API_KEY_1"),
+    _get_secret("GEMINI_API_KEY_2"),
 ]
 GEMINI_MODEL = "gemini-2.0-flash"
 
-ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")
+ANTHROPIC_API_KEY = _get_secret("ANTHROPIC_API_KEY")
 
 MODEL_PARAMS = {
     "xgboost": {
