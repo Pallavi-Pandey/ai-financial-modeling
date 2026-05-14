@@ -1,6 +1,10 @@
 # AI-Powered Financial Modeling & Decision Intelligence
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ai-financial-modeling.streamlit.app/)
+
 A complete end-to-end system that combines machine-learning revenue forecasting (XGBoost + RandomForest ensemble), interactive what-if scenario simulation, and Claude-powered narrative insights to help business leaders make smarter financial decisions — all accessible through a clean Streamlit dashboard or a CLI runner.
+
+🚀 **Live Demo:** https://ai-financial-modeling.streamlit.app
 
 ---
 
