@@ -133,7 +133,7 @@ Follow these steps to explore the full application:
 ### Step 1 — Load Data
 Open the app at `http://localhost:8501`. In the **sidebar**, click **"Use Sample Data"** to load the pre-generated 3-year monthly dataset.
 
-![Data loaded via sidebar](image.png)
+![Data loaded via sidebar](docs/screenshots/image.png)
 
 ---
 
@@ -145,8 +145,8 @@ Navigate to the **📊 Data Overview** tab to see:
 - Monthly Marketing Spend bar chart
 - Marketing Spend vs Revenue scatter plot with OLS trendline
 
-![Data overview tab](image-1.png)
-![Revenue and profit time series](image-2.png)
+![Data overview tab](docs/screenshots/image-1.png)
+![Revenue and profit time series](docs/screenshots/image-2.png)
 
 ---
 
@@ -156,9 +156,9 @@ Go to the **🔮 Forecasting** tab and click **"Train Model"**. The system train
 - Top 15 feature importances (bar chart)
 - 6-month ahead revenue forecast with confidence bands
 
-![Model evaluation metrics](image-3.png)
-![Feature importance chart](image-4.png)
-![6-month forecast with confidence bands](image-5.png)
+![Model evaluation metrics](docs/screenshots/image-3.png)
+![Feature importance chart](docs/screenshots/image-4.png)
+![6-month forecast with confidence bands](docs/screenshots/image-5.png)
 
 ---
 
@@ -170,8 +170,8 @@ Switch to the **🔁 Scenario Simulation** tab. Use the sliders to adjust:
 
 Click **"Run Simulation"** to see the revenue impact table and comparison bar chart.
 
-![Scenario simulation controls and results](image-6.png)
-![Scenario comparison bar chart](image-7.png)
+![Scenario simulation controls and results](docs/screenshots/image-6.png)
+![Scenario comparison bar chart](docs/screenshots/image-7.png)
 
 ---
 
@@ -184,7 +184,7 @@ Open the **🧠 AI Insights** tab. Click any of the three buttons to get live AI
 | 🔁 Scenario Recommendations | Strategic action plan based on simulation results |
 | 📋 Executive Summary | Board-ready briefing covering health, outlook, and priorities |
 
-![AI insights tab](image-8.png)
+![AI insights tab](docs/screenshots/image-8.png)
 
 ---
 
