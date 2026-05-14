@@ -4,7 +4,8 @@
 
 A complete end-to-end system that combines machine-learning revenue forecasting (XGBoost + RandomForest ensemble), interactive what-if scenario simulation, and Claude-powered narrative insights to help business leaders make smarter financial decisions — all accessible through a clean Streamlit dashboard or a CLI runner.
 
-🚀 **Live Demo:** https://ai-financial-modeling.streamlit.app
+**Live Demo:** https://ai-financial-modeling.streamlit.app
+
 
 ---
 
@@ -142,7 +143,7 @@ Open the app at `http://localhost:8501`. In the **sidebar**, click **"Use Sample
 ---
 
 ### Step 2 — Explore the Data Overview
-Navigate to the **📊 Data Overview** tab to see:
+Navigate to the **Data Overview** tab to see:
 - Raw data table with all 36 monthly records
 - Key metrics: row count, average revenue, average profit, profit margin
 - Revenue & Profit time series chart
@@ -155,7 +156,7 @@ Navigate to the **📊 Data Overview** tab to see:
 ---
 
 ### Step 3 — Train the Forecasting Model
-Go to the **🔮 Forecasting** tab and click **"Train Model"**. The system trains an XGBoost + RandomForest ensemble and displays:
+Go to the **Forecasting** tab and click **"Train Model"**. The system trains an XGBoost + RandomForest ensemble and displays:
 - MAE, RMSE, R², and MAPE evaluation metrics
 - Top 15 feature importances (bar chart)
 - 6-month ahead revenue forecast with confidence bands
@@ -167,7 +168,7 @@ Go to the **🔮 Forecasting** tab and click **"Train Model"**. The system train
 ---
 
 ### Step 4 — Run Scenario Simulations
-Switch to the **🔁 Scenario Simulation** tab. Use the sliders to adjust:
+Switch to the **Scenario Simulation** tab. Use the sliders to adjust:
 - **Price Change (%)** — impact of raising or lowering product price
 - **Marketing Spend Change (%)** — effect of budget increases or cuts
 - **Demand / Units Sold Change (%)** — volume sensitivity
@@ -180,13 +181,13 @@ Click **"Run Simulation"** to see the revenue impact table and comparison bar ch
 ---
 
 ### Step 5 — Generate AI Insights
-Open the **🧠 AI Insights** tab. Click any of the three buttons to get live AI-generated analysis powered by the provider fallback chain (Gemini → Pollinations.ai → OllamaFreeAPI → Claude):
+Open the **AI Insights** tab. Click any of the three buttons to get live AI-generated analysis powered by the provider fallback chain (Gemini → Pollinations.ai → OllamaFreeAPI → Claude):
 
 | Button | What it generates |
 |--------|------------------|
-| 📈 Model Performance Insights | Interprets accuracy metrics and top revenue drivers |
-| 🔁 Scenario Recommendations | Strategic action plan based on simulation results |
-| 📋 Executive Summary | Board-ready briefing covering health, outlook, and priorities |
+| Model Performance Insights | Interprets accuracy metrics and top revenue drivers |
+| Scenario Recommendations | Strategic action plan based on simulation results |
+| Executive Summary | Board-ready briefing covering health, outlook, and priorities |
 
 ![AI insights tab](docs/screenshots/image-8.png)
 

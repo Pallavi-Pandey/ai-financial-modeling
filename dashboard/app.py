@@ -31,7 +31,7 @@ from utils.feature_engineering import FeatureEngineer
 # ---------------------------------------------------------------------------
 st.set_page_config(
     page_title="AI Financial Intelligence",
-    page_icon="📈",
+    page_icon=":chart_with_upwards_trend:",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -142,7 +142,7 @@ with st.sidebar:
 # Tabs
 # ---------------------------------------------------------------------------
 tab1, tab2, tab3, tab4 = st.tabs(
-    ["📊 Data Overview", "🔮 Forecasting", "🔁 Scenario Simulation", "🧠 AI Insights"]
+    ["Data Overview", "Forecasting", "Scenario Simulation", "AI Insights"]
 )
 
 # ==========================================================================
@@ -400,7 +400,7 @@ with tab4:
 
         # --- Performance Insights ---
         with col_btn1:
-            if st.button("📈 Model Performance Insights", use_container_width=True):
+            if st.button("Model Performance Insights", use_container_width=True):
                 with st.spinner("Asking Claude for performance insights…"):
                     fi_df = st.session_state.forecaster.get_feature_importance(
                         st.session_state.feature_names
@@ -413,7 +413,7 @@ with tab4:
 
         # --- Scenario Recommendations ---
         with col_btn2:
-            if st.button("🔁 Scenario Recommendations", use_container_width=True):
+            if st.button("Scenario Recommendations", use_container_width=True):
                 if st.session_state.scenario_df is None:
                     st.warning("Run a scenario simulation first.")
                 else:
@@ -426,7 +426,7 @@ with tab4:
 
         # --- Executive Summary ---
         with col_btn3:
-            if st.button("📋 Executive Summary", use_container_width=True):
+            if st.button("Executive Summary", use_container_width=True):
                 with st.spinner("Generating executive summary…"):
                     df_raw = st.session_state.df_raw
                     fi_df = st.session_state.forecaster.get_feature_importance(
