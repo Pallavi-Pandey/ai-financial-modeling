@@ -2,7 +2,7 @@
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ai-financial-modeling.streamlit.app/)
 
-A complete end-to-end system that combines machine-learning revenue forecasting (XGBoost + RandomForest ensemble), interactive what-if scenario simulation, and Claude-powered narrative insights to help business leaders make smarter financial decisions — all accessible through a clean Streamlit dashboard or a CLI runner.
+A complete end-to-end system that combines machine-learning revenue forecasting (XGBoost + RandomForest ensemble), interactive what-if scenario simulation, and AI-powered narrative insights to help business leaders make smarter financial decisions — all accessible through a clean Streamlit dashboard or a CLI runner.
 
 **Live Demo:** https://ai-financial-modeling.streamlit.app
 
@@ -24,8 +24,8 @@ A complete end-to-end system that combines machine-learning revenue forecasting 
                                                   ┌──────────────────────┐
                                                   │  insights/           │
                                                   │  ai_insights.py      │
-                                                  │  (Claude API →       │
-                                                  │   narrative text)    │
+                                                  │  (Pollinations /     │
+                                                  │   OllamaFree)        │
                                                   └──────────┬───────────┘
                                                              │
                                                              ▼
@@ -52,7 +52,7 @@ financial_ai_system/
 │   └── scenario_engine.py        # What-if scenario simulation
 ├── insights/
 │   ├── __init__.py
-│   └── ai_insights.py            # Claude API integration
+│   └── ai_insights.py            # AI insights
 ├── dashboard/
 │   ├── __init__.py
 │   └── app.py                    # Streamlit interactive dashboard
@@ -169,7 +169,7 @@ Click **"Run Simulation"** to see the revenue impact table and comparison bar ch
 ---
 
 ### Step 5 — Generate AI Insights
-Open the **AI Insights** tab. Click any of the three buttons to get live AI-generated analysis powered by the provider fallback chain (Gemini → Pollinations.ai → OllamaFreeAPI → Claude):
+Open the **AI Insights** tab. Click any of the three buttons to get live AI-generated analysis powered by the provider fallback chain (Pollinations.ai → OllamaFreeAPI):
 
 | Button | What it generates |
 |--------|------------------|
