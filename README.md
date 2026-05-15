@@ -76,19 +76,7 @@ cd financial_ai_system
 pip install -r requirements.txt
 ```
 
-### 2. Configure API keys (optional)
-
-Edit the `.env` file in the project root:
-
-```env
-GEMINI_API_KEY_1=your-gemini-key-1
-GEMINI_API_KEY_2=your-gemini-key-2
-ANTHROPIC_API_KEY=your-claude-key
-```
-
-**No keys required** — the app automatically falls back to Pollinations.ai and OllamaFreeAPI (both free, no signup) if your keys are missing or quota is exhausted. All ML features and AI insights work out of the box.
-
-### 3. Generate sample data (optional — auto-generated on first run)
+### 2. Generate sample data (optional — auto-generated on first run)
 
 ```bash
 python data/generate_data.py
@@ -123,10 +111,10 @@ Open the browser at `http://localhost:8501`.
 | `utils/feature_engineering.py` | `FeatureEngineer` class — adds lag features, rolling means, calendar dummies, growth rate, marketing ROI, and profit margin; splits into chronological train/test sets. |
 | `models/forecasting.py` | `FinancialForecaster` — trains an XGBoost + RandomForest ensemble, evaluates with MAE / RMSE / R² / MAPE, generates iterative 6-month forward forecasts with confidence bands, and supports joblib serialisation. |
 | `models/scenario_engine.py` | `ScenarioEngine` — simulates revenue impact of percentage changes to price, marketing spend, or demand; runs full sensitivity sweeps and multi-scenario comparisons. |
-| `insights/ai_insights.py` | `AIInsightsEngine` — produces structured performance analyses, scenario recommendations, and board-ready executive summaries via a 5-provider fallback chain: Gemini key 1 → Gemini key 2 → Pollinations.ai (free, no key) → OllamaFreeAPI (free, no key) → Claude. Always returns insights as long as any provider is reachable. |
+| `insights/ai_insights.py` | `AIInsightsEngine` — produces structured performance analyses, scenario recommendations, and board-ready executive summaries via a 2-provider fallback chain: Pollinations.ai (free, no key) → OllamaFreeAPI (free, no key). |
 | `dashboard/app.py` | Four-tab Streamlit app: Data Overview, Forecasting, Scenario Simulation, and AI Insights. Uses Plotly for all charts and Streamlit session state for model persistence. |
 | `main.py` | Orchestrates the full pipeline from the command line with formatted console output. |
-| `config.py` | Central configuration — API key, model hyper-parameters, data path, test split ratio, and forecast horizon. |
+| `config.py` | Central configuration — model hyper-parameters, data path, test split ratio, and forecast horizon. |
 
 
 ---
