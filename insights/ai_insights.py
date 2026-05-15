@@ -2,25 +2,18 @@
 AI-powered insights engine.
 
 Provider fallback chain (first success wins):
-  1. Gemini key 1  (GEMINI_API_KEY_1)
-  2. Gemini key 2  (GEMINI_API_KEY_2)
-  3. Pollinations.ai  (no key required, openai model)
-  4. OllamaFreeAPI    (no key required, llama3.2)
-  5. Claude           (ANTHROPIC_API_KEY)
-  6. Graceful error message
+  1. Pollinations.ai  (no key required, openai model)
+  2. OllamaFreeAPI    (no key required, llama3.2)
+  3. Graceful error message
 """
 
 from __future__ import annotations
 
-import os
-import sys
+import re
 from typing import Any, Dict, List, Optional
 
 import pandas as pd
 import requests
-
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
-from config import ANTHROPIC_API_KEY, GEMINI_API_KEYS, GEMINI_MODEL
 
 _POLLINATIONS_URL = "https://text.pollinations.ai/"
 _POLLINATIONS_MODEL = "openai"
@@ -29,14 +22,7 @@ _OLLAMA_MODEL = "llama3.2:3b"
 
 
 class AIInsightsEngine:
-    """Generate LLM-powered financial insights.
-
-    Tries providers in order: Gemini 1 → Gemini 2 → Pollinations → OllamaFree → Claude.
-    """
-
-    def __init__(self) -> None:
-        self._gemini_keys: List[str] = [k for k in GEMINI_API_KEYS if k]
-        self._anthropic_key: str = ANTHROPIC_API_KEY or os.getenv("ANTHROPIC_API_KEY", "")
+    """Generate LLM-powered financial insights using free providers."""
 
     # ------------------------------------------------------------------
     # Public methods
@@ -161,63 +147,28 @@ Avoid technical ML jargon; focus on business implications.
 
     def _call_with_fallback(self, prompt: str, system: str) -> str:
         """Try each provider in order; return first successful response."""
-        last_error = "No providers configured."
 
-        # 1 & 2 — Gemini keys
-        for i, key in enumerate(self._gemini_keys, start=1):
-            text, err = self._call_gemini(key, prompt, system)
-            if text is not None:
-                return text
-            last_error = f"Gemini key {i}: {err}"
-
-        # 3 — Pollinations.ai (no key needed)
+        # 1 — Pollinations.ai (no key needed)
         text, err = self._call_pollinations(prompt, system)
         if text is not None:
             return text
         last_error = f"Pollinations: {err}"
 
-        # 4 — OllamaFreeAPI (no key needed)
+        # 2 — OllamaFreeAPI (no key needed)
         text, err = self._call_ollamafree(prompt, system)
         if text is not None:
             return text
         last_error = f"OllamaFree: {err}"
 
-        # 5 — Claude
-        if self._anthropic_key:
-            text, err = self._call_claude(prompt, system)
-            if text is not None:
-                return text
-            last_error = f"Claude: {err}"
-
         return (
             f"AI insights unavailable — all providers failed.\n"
             f"Last error: {last_error}\n\n"
-            "Common causes: quota exhausted, insufficient credits, or network issue."
+            "Common causes: network issue or service temporarily unavailable."
         )
 
     # ------------------------------------------------------------------
     # Provider implementations
     # ------------------------------------------------------------------
-
-    def _call_gemini(
-        self, api_key: str, prompt: str, system_instruction: str
-    ) -> tuple[Optional[str], str]:
-        try:
-            from google import genai  # noqa: PLC0415
-            from google.genai import types  # noqa: PLC0415
-
-            client = genai.Client(api_key=api_key)
-            response = client.models.generate_content(
-                model=GEMINI_MODEL,
-                contents=prompt,
-                config=types.GenerateContentConfig(
-                    system_instruction=system_instruction,
-                    max_output_tokens=1024,
-                ),
-            )
-            return response.text, ""
-        except Exception as exc:
-            return None, f"{type(exc).__name__}: {str(exc)[:120]}"
 
     def _call_pollinations(
         self, prompt: str, system_instruction: str
@@ -249,7 +200,6 @@ Avoid technical ML jargon; focus on business implications.
     ) -> tuple[Optional[str], str]:
         """Free distributed Ollama nodes. No key needed."""
         try:
-            import re  # noqa: PLC0415
             from ollamafreeapi import OllamaFreeAPI  # noqa: PLC0415
 
             client = OllamaFreeAPI()
@@ -262,25 +212,5 @@ Avoid technical ML jargon; focus on business implications.
             if not text:
                 return None, "Response was only reasoning, no output"
             return text, ""
-        except Exception as exc:
-            return None, f"{type(exc).__name__}: {str(exc)[:120]}"
-
-    def _call_claude(
-        self, prompt: str, system_instruction: str
-    ) -> tuple[Optional[str], str]:
-        try:
-            import anthropic  # noqa: PLC0415
-
-            client = anthropic.Anthropic(api_key=self._anthropic_key)
-            response = client.messages.create(
-                model="claude-sonnet-4-6",
-                max_tokens=1024,
-                system=system_instruction,
-                messages=[{"role": "user", "content": prompt}],
-            )
-            for block in response.content:
-                if block.type == "text":
-                    return block.text, ""
-            return None, "No text block in response"
         except Exception as exc:
             return None, f"{type(exc).__name__}: {str(exc)[:120]}"
